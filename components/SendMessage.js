@@ -3,7 +3,8 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 
-const AddItem =({addItem})=>{
+
+const SendMessage =({addItem})=>{
     const [text,setText]=useState('');
     const onChange = textValue => setText(textValue);
   return (
@@ -15,6 +16,7 @@ const AddItem =({addItem})=>{
          <TouchableOpacity style={styles.btn} onPress ={()=> {addItem(text); setText('');}}>
           <Text style={styles.btnText}><Icon name="send" size={20}/></Text>
          </TouchableOpacity>
+         
       </View>
   );
 };
@@ -55,6 +57,7 @@ const styles = StyleSheet.create({
       borderRadius:30,
       borderColor:'black',
     },
+    
   });
 
-export default AddItem;
+export default SendMessage;

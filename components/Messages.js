@@ -3,7 +3,8 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ListItem =({item, deleteItem}) =>{
+const Messages =({item, deleteItem}) =>{
+  
     return (
         <TouchableOpacity style={styles.listItem}>
             <View style={styles.sender}>
@@ -13,7 +14,7 @@ const ListItem =({item, deleteItem}) =>{
         <View style={styles.listItemView}>
             
       <Text style={styles.listItemText}>{item.text}</Text>
-        {/* <Icon name ="remove" size={20} color="firebrick"
+        {/* <Icon name ="remove" size={20} color="firebrick" //Need a delete button
         onPress={()=>deleteItem(item.id)}/> */}
       </View>
             
@@ -64,4 +65,4 @@ const styles = StyleSheet.create({
       }
       
 });
-export default ListItem;
+export default Messages;

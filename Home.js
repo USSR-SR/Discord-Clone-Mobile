@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native';
-import { color } from 'react-native-reanimated';
 //
 import { v4 as uuidv4 } from 'uuid';
 import Header from './components/Header';
@@ -31,9 +30,8 @@ const addItem = text =>{
         <TouchableOpacity style={styles.btn} title= 'lol' onPress={() => navigation.Navigate('Menu')}><Text style={styles.text}>=</Text>
       </TouchableOpacity>
         
-        <Header />
-        
-      
+      <Header />
+
       <FlatList style={styles.messages}
       data={items}
        renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem} />}
@@ -51,10 +49,12 @@ const styles = StyleSheet.create({
     width:400,
   },
   btn: {
-    flex:0.07,
+    width:50,
+    position:'absolute',
+    marginTop:2,
     justifyContent:'center',
     borderRadius:100,
-    width:40,
+    height:50,
     backgroundColor:'#451e3e',
     zIndex:99,
     
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop: 30,
     backgroundColor: '#051e29',
+    paddingTop:45,
   },
   footer:{
     width:50,

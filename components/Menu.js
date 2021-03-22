@@ -1,10 +1,12 @@
 import { Right } from 'native-base';
-import React from 'react';
-import {ScrollView,View, Text, StyleSheet, TouchableOpacity,FlatList,Image} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView,View, Text, StyleSheet, TouchableOpacity,FlatList,Image,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import { v4 as uuidv4 } from 'uuid';
 
+const Menu=()=>{
+  const[channels,setChannels] = useState([]);
 
-const Header=()=>{
   const Header=(props)=>{
     return (
       <View style={styles.header}>
@@ -12,149 +14,98 @@ const Header=()=>{
         </View>
     );
   };
+
   Header.defaultProps = {
       title: 'USSR-SR'
   }
+
+//
+  const addChannel = text =>{
+    setChannels(prevChannels => {
+      return [...prevChannels,{id: uuidv4(), text}];
+    })
+  };
+
+  //
+  const AddChannel =({addChannel})=>{
+    const [text,setText]=useState('');
+    const onChange = textValue => setText(textValue);
+  return (
+    <View style={styles.top}>
+      <TextInput placeholder='Add Channel' style={styles.input} 
+      onChangeText={onChange} value={text} >
+
+         </TextInput>
+         <TouchableOpacity style={styles.addbtn} onPress ={()=> {addChannel(text); setText('');}}>
+         <Text style={styles.text}> #</Text>
+         </TouchableOpacity>
+         
+      </View>
+  );
+};
+
+//
+const Messages =({channel}) =>{
+  
+  return (
+      <TouchableOpacity style={styles.channel}>
+          <View style={styles.sender}></View>
+          <Text style={styles.text}> # - Dummy</Text>
+          
+              
+      </TouchableOpacity>
+  );
+}
+
+ const Leftbar=(props)=>{
+   return(
+  <ScrollView style={styles.left}>
+  <Image source={{uri:'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
+  <Image source={{uri:'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
+  <Image source={{uri:'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
+  <Image source={{uri:'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
+  <Image source={{uri:'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
+  
+    </ScrollView>
+   );
+ }
+Leftbar.defaultProps={
+  url:'https://reactjs.org/logo-og.png',
+}
+//
   return (
     <View style={styles.body}>
     <View style={styles.container}>
    
-      <ScrollView style={styles.left}>
-      <Image source={{uri: 'r'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.serverDp}></Image>
-      </ScrollView>
+      <Leftbar/>
+      
       <ScrollView style={styles.middle}>
       <Header/>
       <TouchableOpacity style={styles.btn}>
             <Text style={styles.btntext}>Invite Komrade</Text>
       </TouchableOpacity>
+
+
+{/* Here goes the add channel option  */}
+<AddChannel addChannel = {addChannel}/>
+
+
     <TouchableOpacity>
-
         {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
 
-            </ScrollView>            
+
+        {/*This thingy renders the List of Channels */}
+        <FlatList style={styles.block}
+      data={channels}
+       renderItem={({channel}) => <Messages channel={channel}/>} 
+      />
+           
         </TouchableOpacity>
-        
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-        <TouchableOpacity>
-
-        {/* A single block */}
-            <ScrollView style={styles.block}>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>
-            <Text style={styles.text}>#DIO</Text>          
-
-            </ScrollView>            
-        </TouchableOpacity>
-
       
         </ScrollView>
         </View>
+        
+        {/* // */}
         <View style={styles.bottom}>
         <TouchableOpacity>
         <Image source={{uri: 'https://i.pinimg.com/originals/49/1f/5b/491f5bc891593f7da0f9c1e5e0e59ab6.png'}} style={styles.btmIcon}></Image>
@@ -172,15 +123,9 @@ const Header=()=>{
         
         </View>
         );
-  //   <View style={styles.container}>
-  //     <Text style={styles.Text}>Wtfff</Text>
-  //   <FlatList>
-  //   <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.senderDp}></Image>
-  //   </FlatList>
-  //     </View>
-  // );
-};
+ };
 
+ // 
 const styles = StyleSheet.create({
   body:{
     flex:1,
@@ -196,7 +141,6 @@ const styles = StyleSheet.create({
     flex:.07,
     flexDirection:'row',
     backgroundColor:'#1e1f26',
-
   },
   serverDp: {
     width:50,
@@ -211,7 +155,17 @@ const styles = StyleSheet.create({
     margin:10,
     borderWidth:.5,
     borderColor: 'black',
-    backgroundColor:'#851e3e',
+    backgroundColor:'#650910',
+    borderRadius:10,
+  },
+  addbtn :{
+    height:35,
+    marginLeft:30,
+    width:40,
+    margin:10,
+    borderWidth:.5,
+    borderColor: 'black',
+    backgroundColor:'#55000e',
     borderRadius:10,
   },
   btntext: {
@@ -220,19 +174,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop:4,
     borderRadius:30,
-    // borderColor:'black',
   },
 
   middle: {
-    // marginTop:50,
-    // paddingTop:50,
     margin:5,
     width:275,
-    // marginLeft:70,
-    // marginTop:-850,
-    // borderRadius:10,
-    // borderWidth:2,
-    // borderColor: 'black',
     backgroundColor:'#343d46',
 
   },
@@ -243,24 +189,31 @@ const styles = StyleSheet.create({
     minHeight:50,
     width:270,
     borderRadius:5,
-    // borderWidth:2,
-    // borderColor: 'black',
     backgroundColor:'#051e29',
     
   },
-  
+  input:{
+    width:200,
+    color:'wheat'
+  },
+    top:{
+    flex:.1,
+    flexDirection:'row',
+    
+  },
   left:{
     paddingTop:50,
     width:50,
-    // borderWidth:2,
-    // borderColor: 'black',
     marginLeft:0,
   },
 
   text:{
     color:'wheat',
-    // borderWidth:2,
-    // borderColor: 'black',
+    padding:10,
+    fontSize:15
+  },
+  channel:{
+    color:'wheat',
     padding:10,
   },
   btmIcon:{
@@ -272,5 +225,5 @@ const styles = StyleSheet.create({
     marginLeft:35,
      }
 });
-export default Header;
+export default Menu;
 

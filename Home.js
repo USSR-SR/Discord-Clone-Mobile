@@ -5,10 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 import Header from './components/Header';
 import ListItem from './components/Messages';
 import AddItem from './components/SendMessage';
-import Navigator from './homeStack';
 
 
-function Home ({ navigation }) {
+import { AuthContext } from "./context";
+// import Navigator from './homeStack';
+
+
+function Home () {
   const[items,setItems] = useState([]);
 
 
@@ -27,9 +30,7 @@ const addItem = text =>{
 
   return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.btn} title= 'lol' onPress={() => navigation.Navigate('Menu')}><Text style={styles.text}>=</Text>
-      </TouchableOpacity>
-        
+               
       <Header />
 
       <FlatList style={styles.messages}
@@ -62,16 +63,15 @@ const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    marginTop: 30,
     backgroundColor: '#051e29',
-    paddingTop:45,
-  },
+     },
   footer:{
     width:50,
     
   },
   messages:{
-    marginBottom:75
+    marginBottom:75,
+    
   },
   text:{
     color:'wheat',

@@ -8,8 +8,8 @@ const Messages =({item, deleteItem}) =>{
     return (
         <TouchableOpacity style={styles.listItem}>
             <View style={styles.sender}>
-            <Image source={{uri: 'https://reactjs.org/logo-og.png'}} style={styles.senderDp}></Image>
-            <Text style={styles.senderName}>DIO</Text>
+            <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7WovTJQ52bp9ag0X4ks_phLAwEQzLUA_uiQ&usqp=CAU'}} style={styles.senderDp}></Image>
+            <Text style={styles.senderName}>Rohan</Text>
             </View>
         <View style={styles.listItemView}>
             
@@ -26,10 +26,13 @@ const styles = StyleSheet.create({
         // position:'absolute',
         flex:1,
         maxWidth:300,
-        padding: 15,
-        borderRadius:30,
-        borderBottomEndRadius:0,
+        minWidth:100,
+        marginVertical: 15,
+        padding:5,
+        borderRadius:20,
+        borderTopLeftRadius:0,
         margin:5,
+        backgroundColor:'#082030',
         
       },
       listItemView: {
@@ -43,8 +46,8 @@ const styles = StyleSheet.create({
         color:'wheat'
       },
       senderDp:{
-          width:30,
-          height:30,
+          width:35,
+          height:35,
           margin:0,
           backgroundColor:'black',
           borderRadius:20
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
       },
       senderName:{
         fontSize: 18,
-        color:'red',
+        color:'#ca3433',
         marginLeft:20
         
     },

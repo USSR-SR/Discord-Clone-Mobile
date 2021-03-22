@@ -1,12 +1,51 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity,Button,Animated, Easing, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
+// import menuButton from '../homeStack';
 
 
 const Header=(props)=>{
+
+  function MenuButton (){
+    const navigation = useNavigation();
+     return(
+         <TouchableOpacity
+         style={styles.btn}
+         onPress={() => {
+               navigation.navigate('Menu');
+         }
+       }>
+         <Text>
+         <Text style={styles.btn1text}>{`@`}</Text>
+         </Text>
+       </TouchableOpacity>
+     )
+}
+
+function MembersButton (){
+  const navigation = useNavigation();
+   return(
+       <TouchableOpacity
+       style={styles.btn}
+       onPress={() => {
+             navigation.navigate('Members');
+       }
+     }>
+       <Text>
+       <Text style={styles.btn1text}>{`#`}</Text>
+       </Text>
+     </TouchableOpacity>
+   )
+}
+
   return (
+    
     <View style={styles.header}>
-      <Text style={styles.text}>#{props.title}</Text>
+      <MenuButton/>
+      <Text style={styles.text}>#{props.title}</Text> 
+      <MembersButton/>
+
       </View>
   );
 };
@@ -18,34 +57,33 @@ Header.defaultProps = {
 
 const styles = StyleSheet.create({
   header: {
-    height:50,
-    width:350,
-    padding:10,
-    backgroundColor: '#851e3e',
-    marginLeft:50,
-    marginTop:-45
-    
+    flexDirection:'row',
+    height:60,
+    width:400,
+    padding:5,
+    backgroundColor: '#700e2e',
+    borderBottomWidth:4,
+     
   },
   text:{
     margin:0,
     height:30,
+    width:210,
       color:'#ffcc5c',
       fontSize:20,
       textAlign:'left',
-    //   borderWidth:2,
-    // borderColor:'black',
+      margin:10,
   },
   btn: {
-    width:40,
-    height:40,
-    backgroundColor: '#451e3e',
-    padding: 9,
-    margin: 5,
-    // borderWidth:2,
-    // borderColor:'black',
+    width:50,
+    height:50,
+    marginHorizontal:20,
+    backgroundColor: '#700e2e',    
     borderRadius: 30,
+    
 
   },
+  
   btnText: {
     color: '#f6cd61',
     fontSize: 20,
@@ -53,6 +91,12 @@ const styles = StyleSheet.create({
     borderRadius:30,
     borderColor:'black',
   },
+  btn1text: {
+    color: '#f6cd61',
+    fontSize: 30,
+    textAlign: 'center',
+    },
+
 });
 
 export default Header;

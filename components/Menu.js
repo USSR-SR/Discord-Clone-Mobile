@@ -2,6 +2,7 @@ import { Right } from 'native-base';
 import React, {useState} from 'react';
 import {ScrollView,View, Text, StyleSheet, TouchableOpacity,FlatList,Image,TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
 
 const Menu=()=>{
@@ -10,7 +11,7 @@ const Menu=()=>{
   const Header=(props)=>{
     return (
       <View style={styles.header}>
-        <Text style={styles.text}>{props.title}</Text>
+        <Text style={styles.server}>{props.title}</Text>
         </View>
     );
   };
@@ -19,7 +20,22 @@ const Menu=()=>{
       title: 'USSR-SR'
   }
 
-//
+
+////
+function Homebutton (){
+  const navigation = useNavigation();
+   return(
+       <TouchableOpacity
+       style={styles.channel}
+       onPress={() => {
+             navigation.navigate('Home');
+       }
+     }>
+       <Text style={styles.text}> # - Dummy</Text>
+       </TouchableOpacity>
+   )
+}
+
   const addChannel = text =>{
     setChannels(prevChannels => {
       return [...prevChannels,{id: uuidv4(), text}];
@@ -37,7 +53,7 @@ const Menu=()=>{
 
          </TextInput>
          <TouchableOpacity style={styles.addbtn} onPress ={()=> {addChannel(text); setText('');}}>
-         <Text style={styles.text}> #</Text>
+         <Text style={styles.addbtntext}>+</Text>
          </TouchableOpacity>
          
       </View>
@@ -48,12 +64,11 @@ const Menu=()=>{
 const Messages =({channel}) =>{
   
   return (
-      <TouchableOpacity style={styles.channel}>
-          <View style={styles.sender}></View>
-          <Text style={styles.text}> # - Dummy</Text>
+      <Homebutton style={styles.channel}>
+          
           
               
-      </TouchableOpacity>
+      </Homebutton>
   );
 }
 
@@ -132,9 +147,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex:1,
-    marginTop: 30,
     backgroundColor: '#051e29',
-    width:350,
+    width:400,
     flexDirection: 'row',
     },
   bottom:{
@@ -146,12 +160,12 @@ const styles = StyleSheet.create({
     width:50,
     height:50,
     borderRadius:30,
-    margin:5,
+    margin:10,
   },
   btn:{
     height:35,
     marginLeft:30,
-    width:200,
+    width:250,
     margin:10,
     borderWidth:.5,
     borderColor: 'black',
@@ -159,14 +173,20 @@ const styles = StyleSheet.create({
     borderRadius:10,
   },
   addbtn :{
-    height:35,
+    height:45,
     marginLeft:30,
     width:40,
-    margin:10,
     borderWidth:.5,
     borderColor: 'black',
-    backgroundColor:'#55000e',
+    backgroundColor:'#111e',
     borderRadius:10,
+    paddingBottom:5,
+  },
+  addbtntext: {
+    color: '#f6cd61',
+    fontSize: 30,
+    textAlign: 'center',
+    borderRadius:30,
   },
   btntext: {
     color: '#f6cd61',
@@ -177,8 +197,7 @@ const styles = StyleSheet.create({
   },
 
   middle: {
-    margin:5,
-    width:275,
+    width:300,
     backgroundColor:'#343d46',
 
   },
@@ -187,12 +206,13 @@ const styles = StyleSheet.create({
     marginRight:6,
     marginLeft:6,
     minHeight:50,
-    width:270,
+    width:300,
     borderRadius:5,
     backgroundColor:'#051e29',
     
   },
   input:{
+    marginLeft:20,
     width:200,
     color:'wheat'
   },
@@ -211,6 +231,11 @@ const styles = StyleSheet.create({
     color:'wheat',
     padding:10,
     fontSize:15
+  },
+  server:{
+    color:'wheat',
+    padding:15,
+    fontSize:21,
   },
   channel:{
     color:'wheat',
